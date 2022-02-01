@@ -1,0 +1,300 @@
+/* custom properties to define colours */
+:root {
+    --cream: #FFFFF4;
+    --black: #0A0402;
+    --creamdarker: #F8F8EA;
+    --countdown: #CDA382;
+    --countdownlight: #DDC2AE;
+    --darkbackground: #322F3D;
+    --darkbackgrounddarker: #29282E;
+    --switch-color: var(--black);
+    --ball-color: var(--cream);
+    --toggle-translate: 0;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+.flex{
+    display: flex;
+}
+body{
+    background-color: #322F3D;
+    font-family: 'Montserrat', sans-serif;
+    color: #0A0402;
+    font-style: regular;
+    font-size: clamp(13px, 10vw, 20px);
+    line-height: 1.5;
+    /* convention du web : séparer paragraphes de 1.3 */
+    cursor: none;
+}
+body.dark{
+    background-color: var(--darkbackground);
+    color: var(--cream);
+    --switch-color: var(--cream);
+    --ball-color: var(--black);
+    --toggle-translate: 2.5rem;
+}
+img{
+    /* garder ratio d'une image  */
+    object-fit: cover;
+    display: block;
+    max-width: 100%; /* si elle n'a plus la place, elle va se reduire */
+}
+div{
+    height: auto;
+}
+button{
+    width: 100%;
+    border-radius: 50px;
+    border: 1px solid var(--black);
+    background-color: var(--black);
+    padding: 2% 3% 2% 3%;
+    /* padding: top right bottom left*/
+    transition: background-color .5s;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--cream);
+    font-size: clamp(12px, 10vw, 16px);
+    line-height: 24px;
+    font-weight: 500;
+    justify-content: center;
+    align-self: center;
+}
+.dark button{
+    border: 1px solid var(--cream);
+    background-color: var(--cream);
+    color: var(--black);
+}
+button:hover {
+    color: var(--black) !important;
+    background-color: var(--cream);
+    border: 1px solid var(--black) !important;
+    /* cursor: pointer; */
+}
+.dark button:hover {
+    color: var(--cream) !important;
+    background-color: var(--black);
+    border: 1px solid var(--cream) !important;
+    /* cursor: pointer; */
+}
+button a{
+    color: var(--cream);
+}
+.dark button a{
+    color: var(--black);
+}
+button a:hover{
+    color: var(--black);
+}
+.dark button a:hover{
+    color: var(--cream);
+}
+p{
+    font-size: clamp(12px, 10vw, 16px);
+}
+h1, h2, h3, h5, h6{
+    font-family: 'Cormorant', serif;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+h1{
+    font-size: clamp(36px, 7vw, 75px);
+    /* transition: transform 330ms ease-in-out; */
+}
+/* h1:hover {
+    transform: translate(5vh);
+} */
+h2{
+    font-size: clamp(32px, 7vw, 60px);
+}
+h3{
+    font-size: clamp(28px, 7vw, 40px);
+}
+h4{
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(13px, 10vw, 20px);
+    line-height: 30px;
+    font-weight: 500;
+}
+h5{
+    font-size: clamp(18px, 7vw, 25px);
+}
+h6{
+    font-size: clamp(500px, 50vw, 1000px); 
+    font-weight: 300;
+}
+a{
+    font-size: clamp(13px, 7vw, 20px);
+    text-decoration: none;
+    color: var(--countdown);
+    transition: color .5s;
+}
+.dark a{
+    color: var(--countdownlight);
+}
+li{
+    list-style: none;
+}
+
+/* Cursor couloured animation */
+.cursor{
+    z-index: 999;
+    position: fixed;
+    background: var(--countdown);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    /* box-shadow: 0 0 20px #2696E8,
+                0 0 60px #2696E8,            
+                0 0 100px #2696E8; */
+    box-shadow: 0 0 20px var(--countdown),
+                0 0 60px var(--countdown),            
+                0 0 100px var(--countdown);            
+    animation: colors 5s infinite;  
+    transform: translate(-50%, -50%);
+    display: none;
+    /* backdrop-filter: grayscale(); */
+}
+@keyframes colors{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    100%{
+        filter: hue-rotate(360deg);
+    }
+}
+.cursor:before{
+    content: '';
+    position: absolute;
+    /* background: #2696E8; */
+    background: var(--countdown);
+    width: 50px;
+    height: 50px;
+    opacity: .2;
+    transform: translate(-30%, -30%);
+    border-radius: 50%;
+}
+
+/* Circle game */
+.title{
+    color: #FFFFF4;
+    text-align: center;
+    padding-top: 7%;
+    margin-bottom: -7%;
+}
+.circle-container{
+    justify-content: space-evenly;
+    align-items: center;
+    height: 70vh;
+    /* border: 2px solid pink; */
+}
+#circle-pink{
+    background-color: #CDA382;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    animation-name: pink;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+@keyframes pink{
+    0% {left: 0px; top: 300px;}
+    25% {left: 300px; top: 300px;}
+    50% {left: 300px; top: 0px;}
+    75% {left: 0px; top: 0px;}
+    100% {left: 0px; top: 300px;}
+}
+#circle-cream{
+    background-color: #F8F8EA;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    position: relative;
+    animation-name: cream;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+@keyframes cream{
+    0% {left: 0px; top: 0px;}
+    25% {left: 200px; top: 0px;}
+    50% {left: 200px; top: 200px;}
+    75% {left: 0px; top: 200px;}
+    100% {left: 0px; top: 0px;}
+}
+#circle-pinkish{
+    background-color: #DDC2AE;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    animation-name: pinkish;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+@keyframes pinkish{
+    0% {left: 0px; top: 0px;}
+    25% {left: 0px; top: 200px;}
+    50% {left: 200px; top: 200px;}
+    75% {left: 200px; top: 0px;}
+    100% {left: 0px; top: 0px;}
+}
+
+/* Cookies */
+.cookies{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: #29282E;
+    justify-content: space-around;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    padding: 2rem;
+    opacity: 1;
+    transition: .5s;
+}
+.btn{
+    margin: 5%;
+}
+.cookies-btn{
+    justify-content: space-around;
+    width: 40vw;
+    /* border: 2px lime solid; */
+}
+.cookies-text{
+    color: #DDC2AE;
+}
+.btn-accept{
+    background-color: #CDA382;
+    border: 1px solid #CDA382;
+}
+.btn-deny{
+    background-color: #29282E;
+    border: 1px solid #CDA382;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px){
+    .cookies, .cookies-btn{
+        flex-direction: column;
+        text-align: center;
+    }
+    .cookies-btn{
+        width: 60vw;
+    }
+}
+
+/* Breakpoints - most common screen size devices used in 2021:
+1920×1080
+1366×768 
+360×640 => Galaxy S5
+414×896 => iPhone 6/7/8+
+1536×864
+375×667 => iPhone X
+768x1024 => iPad */
